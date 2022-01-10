@@ -11,6 +11,7 @@ app.set('port', process.env.PORT || 3000); //hace referencia a una variable de e
 app.set('views', path.join(__dirname, 'views'));
 
 //middlewares
+app.use(express.urlencoded({extended: false}));//se conviernte los datos de un form en json
 
 
 
@@ -19,8 +20,13 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 //routes
+app.get('/', (req,res)=>{
+    res.send(`Hello Word`)
+})
 
 
 //static files
+app.use(express.static(path.join(__dirname, 'public')));//se define la carpeta public
+
 
 module.exports = app;
