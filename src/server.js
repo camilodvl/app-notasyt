@@ -1,6 +1,7 @@
 //codigo del servidor
 const express = require('express');
 const path = require('path');
+const {engine} = require('express-handlebars')
 
 //inicializar
 const app = express(); //se crea el servidor
@@ -9,6 +10,14 @@ const app = express(); //se crea el servidor
 //settings
 app.set('port', process.env.PORT || 3000); //hace referencia a una variable de entorno llamada port, sino usa el 3000
 app.set('views', path.join(__dirname, 'views'));
+app.engine('.hbs', engine({ //se configura el handlebars
+    defaultLayout: 'main',
+    layoutsDir: path.join(app.get('views'), 'layouts'),//donde estan los layout, como cabeceras y footers
+    partialsDir: path.join(app.get('views'), 'partials'),
+    extname: '.hbs' //se especifica la extensión de los archivos
+}));
+
+app.set('view engine', '.hbs');
 
 //middlewares
 app.use(express.urlencoded({extended: false}));//se conviernte los datos de un form en json
@@ -21,7 +30,7 @@ app.use(express.urlencoded({extended: false}));//se conviernte los datos de un f
 
 //routes
 app.get('/', (req,res)=>{
-    res.send(`Hello Word`)
+    res.render('index');
 })
 
 
