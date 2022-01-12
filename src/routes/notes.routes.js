@@ -10,8 +10,8 @@ const {
 } = require("../controllers/notes.controller"); //se importa la funcion desde el controlador
 
 //New note
-router.get("/note/add", renderNoteForm); //cuando llega la solicitud a la ruta, ejecuta la función que se importó desde el controlador
-router.post("/notes/add", createNewNote);
+router.get("/notes/add", renderNoteForm); //cuando llega la solicitud a la ruta, ejecuta la función que se importó desde el controlador
+router.post("/notes/new-note", createNewNote);
 
 //get all notes
 router.get("/notes", renderNotes);
