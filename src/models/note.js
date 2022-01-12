@@ -12,5 +12,5 @@ const NoteSchema = new Schema ({
 
 
 
-
-module.exports(model('note', NoteSchema));// se crea el modelo (agrega funciones de guardar, update...) nombre del modelo y schema
+// se crea el modelo (agrega funciones de guardar, update...) nombre del modelo y schema
+module.exports=(model('note', NoteSchema));
