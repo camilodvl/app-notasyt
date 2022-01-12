@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 const {engine} = require('express-handlebars')
+const methodOverride = require('method-override');//para incluir el meotod put y delete de los forms y router
 
 //inicializar
 const app = express(); //se crea el servidor
@@ -21,7 +22,7 @@ app.set('view engine', '.hbs');
 
 //middlewares
 app.use(express.urlencoded({extended: false}));//se conviernte los datos de un form en json
-
+app.use(methodOverride('_method'));
 
 
 //Variables Globales
