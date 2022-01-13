@@ -3,7 +3,8 @@ const express = require('express');
 const path = require('path');
 const {engine} = require('express-handlebars')
 const methodOverride = require('method-override');//para incluir el meotod put y delete de los forms y router
-
+const flash = require('connect-flash');
+const session = require('express-session')
 //inicializar
 const app = express(); //se crea el servidor
 
@@ -23,15 +24,25 @@ app.set('view engine', '.hbs');
 //middlewares
 app.use(express.urlencoded({extended: false}));//se conviernte los datos de un form en json
 app.use(methodOverride('_method'));
-
+app.use(session({
+    secret: 'Secretoseguro25448',
+    resave: 'true',
+    saveUninitialized: 'true'
+}));
+app.use(flash());
 
 //Variables Globales
-
+app.use((req, res, next) =>{//el next se usa para que continue ejecutando lo que hay debajo
+    res.locals.success_msg = req.flash('success_msg');
+       
+    next();
+});
 
 
 //routes
 app.use(require('./routes/index.routes'));
 app.use(require('./routes/notes.routes'));
+app.use(require('./routes/users.routes'));
 
 //static files
 app.use(express.static(path.join(__dirname, 'public')));//se define la carpeta public

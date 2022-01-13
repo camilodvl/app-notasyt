@@ -12,6 +12,7 @@ notesController.createNewNote= async (req,res)=>{
     //creamos una nota nueva, previamente importada, y le asignamos los valores del body, js asigna automaticamente los valores sin necesidad de escribir description: description
     const newNote = new Note({tittle, description});
     await newNote.save();//mongoose guarda la información en la bd
+    req.flash('success_msg', ' Note added succesfully'); //creamos el mensaje
     res.redirect('/notes')
 };
 
@@ -32,13 +33,14 @@ notesController.renderEditForm = async (req, res)=>{
 notesController.updateNote =  async (req,res)=>{
     const {tittle, description} = req.body;
     await Note.findByIdAndUpdate(req.params.id, {tittle, description})
+    req.flash('success_msg', 'Note updated succesfully')
     res.redirect('/notes')
 }
 
 notesController.deleteNote = async (req,res)=>{
     //se obtiene el id, que se pasa por un parametro /delete/:parametro
     await Note.findByIdAndDelete(req.params.id);
-
+    req.flash('success_msg', 'Note deleted succesfully')
     res.redirect('/notes')
 }
 

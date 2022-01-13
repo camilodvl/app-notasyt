@@ -17,11 +17,15 @@
 
 </head>
 <body>
+    
     {{>navigation}} 
     {{!-- dos llaves y el simbolo de mayor, especifican que está invocando un partials --}}
 
 
 <main class="container p-5">
+    
+    {{>messages}}
+
     {{{body}}}
 </main>
 {{!-- llama lo que se pase en render --}}
