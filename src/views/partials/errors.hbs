@@ -1,0 +1,10 @@
+{{!-- Revisa errores al momento de registrar --}}
+
+{{#each errors}}
+    
+    <div class="alert alert-danger alert-dismissible fade show">
+    <strong> {{text}} </strong>
+    <button type="button" class="close" data-bs-dismiss="alert">&times;</button>
+</div>
+
+{{/each}}

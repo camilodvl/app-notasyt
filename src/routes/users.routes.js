@@ -4,7 +4,7 @@ const {renderSignUpForm, renderSignInForm ,signUp, signIn, logout} = require('..
 
 //login
 router.get('/users/signup', renderSignUpForm);
-router.post('/users/singup', signUp);
+router.post('/users/signup', signUp);
 
 //registro
 router.get('/users/signin', renderSignInForm);
