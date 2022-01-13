@@ -7,6 +7,7 @@ const flash = require('connect-flash');
 const session = require('express-session')
 //inicializar
 const app = express(); //se crea el servidor
+const morgan = require('morgan');
 
 
 //settings
@@ -22,6 +23,7 @@ app.engine('.hbs', engine({ //se configura el handlebars
 app.set('view engine', '.hbs');
 
 //middlewares
+app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));//se conviernte los datos de un form en json
 app.use(methodOverride('_method'));
 app.use(session({
@@ -30,6 +32,7 @@ app.use(session({
     saveUninitialized: 'true'
 }));
 app.use(flash());
+
 
 //Variables Globales
 app.use((req, res, next) =>{//el next se usa para que continue ejecutando lo que hay debajo
