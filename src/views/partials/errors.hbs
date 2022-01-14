@@ -1,5 +1,14 @@
 {{!-- Revisa errores al momento de registrar --}}
 
+{{#if error}}
+    <div class="alert alert-danger alert-dismissible fade show">
+    <strong> {{error}} </strong>
+    <button type="button" class="close" data-bs-dismiss="alert">&times;</button>
+</div>
+
+{{/if}}
+
+
 {{#each errors}}
     
     <div class="alert alert-danger alert-dismissible fade show">

@@ -8,6 +8,8 @@ const session = require('express-session')
 //inicializar
 const app = express(); //se crea el servidor
 const morgan = require('morgan');
+const passport = require('passport')
+require('./config/passport')
 
 
 //settings
@@ -31,13 +33,17 @@ app.use(session({
     resave: 'true',
     saveUninitialized: 'true'
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash());
+
 
 
 //Variables Globales
 app.use((req, res, next) =>{//el next se usa para que continue ejecutando lo que hay debajo
     res.locals.success_msg = req.flash('success_msg');
-       
+    res.locals.error = req.flash('error');
+    res.locals.user = req.user || null;
     next();
 });
 
